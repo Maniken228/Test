@@ -1,8 +1,5 @@
 <template>
   <div class="hello">
-      <div class="gg">
-          Hello World!
-      </div>
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -45,18 +42,11 @@ export default defineComponent({
   },
 });
 </script>
-<!--<a href="https://www.flaticon.com/ru/free-icons/-" title="буква я иконки">Буква я иконки от Laisa Islam Ani - Flaticon</a>-->
+<!--<a href="https://www.flaticon.com/ru/free-icons/-" title="буква я иконки">Буква я иконки от Laisa Islam Ani - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/testing" title="testing icons">Testing icons created by Freepik - Flaticon</a>
+-->
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
-.hello {
-    border: 1px solid black;
-
-    .gg {
-        border: 1px solid red;
-    }
-}
-
 h3 {
   margin: 40px 0 0;
 }
