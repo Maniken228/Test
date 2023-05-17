@@ -2,12 +2,13 @@
     <main class="main">
         <section class="container">
             <FirstBlock/>
-            <SecondBlock/>
         </section>
     </main>
 </template>
 
 <style lang="scss">
+
+@import "@/assets/styles/style.scss";
 
 .main {
     width: 100vw;
@@ -40,6 +41,11 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
 
 *, :after, :before {
     border: 0;
@@ -96,8 +102,12 @@ h1 {
 
 hr {
     box-sizing: content-box; /* 1 */
-    height: 0; /* 1 */
+    width: 490px;
+    height: 1px; /* 1 */
     overflow: visible; /* 2 */
+    background: #E6E9ED;
+    margin-top: 0.875rem;
+    margin-bottom: 1.688rem;
 }
 
 /**

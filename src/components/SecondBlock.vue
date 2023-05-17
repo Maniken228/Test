@@ -1,11 +1,17 @@
 <template>
   <div class="second__box">
+      <Result/>
+      <SBBottom/>
   </div>
 </template>
 
 <script>
+import Result from "@/components/Result.vue";
+import SBBottom from "@/components/SB-Bottom.vue";
+
 export default {
-    name: "SecondBlock"
+    name: "SecondBlock",
+    components: {SBBottom, Result}
 }
 </script>
 

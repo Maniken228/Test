@@ -1,33 +1,33 @@
 <template>
-<nav class="navigation__wrap">
-    <ul class="navigation">
-        <li class="list">
-            <a href="#" class="link">
-                Lorem1
-            </a>
-        </li>
-        <li class="list">
-            <a href="#" class="link">
-                Lorem2
-            </a>
-        </li>
-        <li class="list">
-            <a href="#" class="link">
-                Lorem3
-            </a>
-        </li>
-        <li class="list">
-            <a href="#" class="link">
-                Lorem4
-            </a>
-        </li>
-    </ul>
-</nav>
+    <nav class="navigation__wrap">
+        <ul class="navigation">
+            <li class="list">
+                <a href="#" class="link">
+                    Lorem1
+                </a>
+            </li>
+            <li class="list">
+                <a href="#" class="link">
+                    Lorem2
+                </a>
+            </li>
+            <li class="list">
+                <a href="#" class="link">
+                    Lorem3
+                </a>
+            </li>
+            <li class="list">
+                <a href="#" class="link">
+                    Lorem4
+                </a>
+            </li>
+        </ul>
+    </nav>
 </template>
 
 <script lang="ts">
 
-import { defineComponent } from 'vue';
+import {defineComponent} from 'vue';
 
 export default defineComponent({
     name: "Navigation"
