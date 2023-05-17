@@ -1,11 +1,27 @@
 <template>
     <div class="calculator__wrap">
         <div class="calculator__row">
-            <label class="calculator__text">Amount?</label>
-            <div class="calculator__input-wrapper">
-                <button class="calculator__button" @click="decrementAmount">-</button>
-                <input class="calculator__input" type="number" v-model.number="investmentAmount" @input="handleAmountChange" />
-                <button class="calculator__button" @click="incrementAmount">+</button>
+            <div class="amount_wrap">
+                <label class="calculator__text">Amount?</label>
+                <div class="massage" :class="{ on: displayMessage }">
+                    {{ message }}
+                </div>
+            </div>
+            <div class="calculator__input-wrap">
+                <input
+                        class="calculator__input"
+                        type="number"
+                        v-model.number="investmentAmount"
+                        @input="handleAmountChange"
+                />
+                <div class="button__wrap">
+                    <button class="calculator__button" @click="decrementAmount">
+                        <img class="button__photo" alt="button" src="../assets/-.webp">
+                    </button>
+                    <button class="calculator__button" @click="incrementAmount">
+                        <img class="button__photo" alt="button" src="../assets/+.webp">
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -42,16 +58,25 @@
 
         <div class="calculator__row">
             <label class="calculator__text">Period?</label>
-            <el-select class="calculator__input" v-model="investmentPeriod" @change="calculate" style="padding: 0px">
-                <el-option v-for="option in periodOptions" :key="option.value" :label="option.label"
-                           :value="option.value"></el-option>
+            <el-select
+                    class="calculator__input"
+                    v-model="investmentPeriod"
+                    @change="calculate"
+                    style="padding: 0px"
+            >
+                <el-option
+                        v-for="option in periodOptions"
+                        :key="option.value"
+                        :label="option.label"
+                        :value="option.value"
+                ></el-option>
             </el-select>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {defineComponent, ref} from "vue";
 
 interface CurrencyOption {
     value: string;
@@ -67,37 +92,47 @@ export default defineComponent({
             selectedCurrency: "TUSD",
             investmentPeriod: "1",
             currencyOptions: [
-                { value: "TUSD", label: "TUSD (Test US Dollar)", interestRate: 0.12 },
-                { value: "TEUR", label: "TEUR (Test Euro)", interestRate: 0.13 },
-                { value: "TCNY", label: "TCNY (Test Chinese Yuan)", interestRate: 0.2 },
-                { value: "TINR", label: "TINR (Test Indian Rupee)", interestRate: 0.33 },
-                { value: "TBRL", label: "TBRL (Test Brazilian Real)", interestRate: 0.21 },
-                { value: "TIDR", label: "TIDR (Test Indonesian Rupiah)", interestRate: 0.8 },
+                {value: "TUSD", label: "TUSD (Test US Dollar)", interestRate: 0.12},
+                {value: "TEUR", label: "TEUR (Test Euro)", interestRate: 0.13},
+                {value: "TCNY", label: "TCNY (Test Chinese Yuan)", interestRate: 0.2},
+                {value: "TINR", label: "TINR (Test Indian Rupee)", interestRate: 0.33},
+                {value: "TBRL", label: "TBRL (Test Brazilian Real)", interestRate: 0.21},
+                {value: "TIDR", label: "TIDR (Test Indonesian Rupiah)", interestRate: 0.8},
             ] as CurrencyOption[],
             investmentResult: 0,
             isSelectOpen: false,
             filterText: "",
             periodOptions: [
-                { label: "1 month", value: "1" },
-                { label: "3 months", value: "3" },
-                { label: "6 months", value: "6" },
-                { label: "12 months", value: "12" },
-                { label: "24 months", value: "24" },
+                {label: "1 month", value: "1"},
+                {label: "3 months", value: "3"},
+                {label: "6 months", value: "6"},
+                {label: "12 months", value: "12"},
+                {label: "24 months", value: "24"},
             ],
+            displayMessage: false,
+            message: "",
         };
     },
 
     computed: {
         filteredCurrencies(): CurrencyOption[] {
             const filterText = this.filterText.toLowerCase();
-            return this.currencyOptions.filter((option) => option.label.toLowerCase().includes(filterText));
+            return this.currencyOptions.filter((option) =>
+                option.label.toLowerCase().includes(filterText)
+            );
         },
     },
 
     methods: {
         handleAmountChange() {
             if (this.investmentAmount < 1000 || this.investmentAmount > 1000000) {
-                alert("Invalid amount. Please enter a value between 1000 and 1000000.");
+                this.displayMessage = true;
+                this.message =
+                    "Lorem ipsum dolor sit";
+                setTimeout(() => {
+                    this.displayMessage = false;
+                    this.message = "";
+                }, 5000);
             }
         },
 
@@ -116,7 +151,9 @@ export default defineComponent({
         },
         calculate() {
             const {investmentAmount, selectedCurrency, investmentPeriod} = this;
-            const selectedCurrencyOption = this.currencyOptions.find((option) => option.value === selectedCurrency);
+            const selectedCurrencyOption = this.currencyOptions.find(
+                (option) => option.value === selectedCurrency
+            );
 
             if (selectedCurrencyOption) {
                 const interestRate = selectedCurrencyOption.interestRate;
@@ -155,52 +192,58 @@ export default defineComponent({
         flex-direction: column;
         gap: 12px;
 
-        .calculator__text {
-            font-size: 16px;
-            line-height: 18px;
-        }
-
-        .calculator__input {
+        .calculator__input-wrap {
             width: 547px;
-            height: 50px;
-            background: #F4F5F6;
-            padding-left: 1.3rem;
-            border-radius: 6px;
+            position: relative;
+
+            .button__wrap {
+                display: flex;
+                gap: 7px;
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translate(-50%, -50%);
+
+                .calculator__button {
+                    width: 19px;
+                    height: 19px;
+                    cursor: pointer;
+                    transition: all .3s ease;
+
+                    .button__photo {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .calculator__button:active {
+                    transform: scale(0.8);
+                }
+            }
         }
 
-        .calculator__input:focus {
-            border: 1px solid #42b983;
+        .amount_wrap {
+            width: 547px;
+            display: flex;
+            justify-content: space-between;
+
+            .massage {
+                color: #ff0000;
+                opacity: 0;
+                transition: 0.3s all ease;
+            }
+
+            .on {
+                transition: 0.3s all ease;
+                opacity: 1;
+            }
         }
     }
 }
 
-.input__text {
-    width: 490px;
-    padding-top: 1.8rem;
-    padding-left: 1rem;
-    font-weight: 400;
-    font-size: 14px;
+.calculator__text {
+    font-size: 16px;
     line-height: 18px;
-    color: #838C8A;
-}
-
-
-.calculator__input-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.calculator__button {
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background: none;
-    cursor: pointer;
 }
 
 .calculator__input {
@@ -213,5 +256,15 @@ export default defineComponent({
 
 .calculator__input:focus {
     border: 1px solid #42b983;
+}
+
+.input__text {
+    width: 490px;
+    padding-top: 1.8rem;
+    padding-left: 1rem;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: #636e72;
 }
 </style>

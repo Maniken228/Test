@@ -202,6 +202,7 @@ sup {
 
 img {
     border-style: none;
+    object-fit: cover;
 }
 
 /* Forms
