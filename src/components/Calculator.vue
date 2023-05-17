@@ -145,6 +145,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .calculator__wrap {
     display: flex;
+    opacity: 1;
     flex-direction: column;
     gap: 28px;
     padding-top: 3rem;
