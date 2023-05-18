@@ -1,11 +1,11 @@
 <template>
     <div class="first__box">
         <Navigation/>
-        <Calculator @result-updated="updateResult"/>
+        <Calculator :investmentResult="investmentResult" @result-updated="handleResultUpdated"/>
         <FBBottom/>
     </div>
     <div class="second__box">
-        <Result :investmentResult="investmentResult"/>
+        <Result :result="investmentResult"/>
         <SBBottom/>
     </div>
 </template>
@@ -32,7 +32,7 @@ export default defineComponent({
         };
     },
     methods: {
-        updateResult(result: number) {
+        handleResultUpdated(result: number) {
             this.investmentResult = result;
         },
     },
@@ -53,6 +53,7 @@ export default defineComponent({
     height: 524px;
     background: #56C6AD;
     border-radius: 0px 10px 10px 0px;
+    padding-left: 3.125rem;
 }
 
 </style>

@@ -54,11 +54,6 @@ export default defineComponent({
                 line-height: 129%;
                 transition: .4s ease all;
             }
-
-            .link:hover {
-                border-bottom: 2px solid #56C6AD;
-                box-shadow: 0px 1px 2px rgba(86, 198, 173, 0.25);
-            }
         }
     }
 }
